@@ -4,6 +4,8 @@ manifest:
       url-base: https://github.com/zephyrproject-rtos
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
+    - name: khoek
+      url-base: https://github.com/khoek
   projects:
     - name: zephyr
       remote: khoek

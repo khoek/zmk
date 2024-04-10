@@ -6,7 +6,7 @@ manifest:
       url-base: https://github.com/zmkfirmware
   projects:
     - name: zephyr
-      remote: zmkfirmware
+      remote: khoek
       revision: v3.5.0+zmk-fixes
       clone-depth: 1
       import:

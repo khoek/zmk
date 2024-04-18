@@ -227,10 +227,10 @@ static void zmk_rgb_underglow_central_send() {
     }
 }
 
-#define NUM_PROFILE_COLORS 4
+#define NUM_BT_COLORS 4
 
-static const struct led_rgb BT_COLORS[NUM_PROFILE_COLORS] = {LED_RGB(0xFFFFFF), LED_RGB(0x0000FF),
-                                                             LED_RGB(0xFF0000), LED_RGB(0x00FF00)};
+static const struct led_rgb BT_COLORS[NUM_BT_COLORS] = {LED_RGB(0xFFFFFF), LED_RGB(0x0000FF),
+                                                        LED_RGB(0xFF0000), LED_RGB(0x00FF00)};
 #endif
 
 static const struct led_rgb LAYER_COLORS[8] = {
@@ -297,14 +297,13 @@ static void zmk_rgb_underglow_effect_kinesis() {
 
     // set second led to bluetooth state, blinking quickly if bluetooth not paired,
     // and slowly if not connected
-    int prof_idx = zmk_ble_active_profile_index();
+    int bt_idx = zmk_ble_active_profile_index();
     if (zmk_ble_active_profile_is_open()) {
         bt_blinking = zmk_kinesis_blink_step(0, 2);
     } else if (!zmk_ble_active_profile_is_connected()) {
         bt_blinking = zmk_kinesis_blink_step(1, 13);
     }
-    pixels[1] =
-        (prof_idx < NUM_PROFILE_COLORS && !bt_blinking) ? BT_COLORS[prof_idx] : LED_RGB(0x000000);
+    pixels[1] = (bt_idx < NUM_BT_COLORS && !bt_blinking) ? BT_COLORS[bt_idx] : LED_RGB(0x000000);
 
     // set third led to layer state
     pixels[2] = LAYER_COLORS[layer_color_left];
